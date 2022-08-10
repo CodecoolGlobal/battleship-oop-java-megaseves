@@ -20,12 +20,17 @@ public class Game {
 
 
     public void initializeGame(){
-        int [] a = {5,5};
-        System.out.println(Arrays.deepToString(generateShipCoordinates(a, 1, 3)));
-        System.out.println(Arrays.deepToString(generateShipCoordinates(a, 2, 3)));
-        System.out.println(Arrays.deepToString(generateShipCoordinates(a, 3, 3)));
-        System.out.println(Arrays.deepToString(generateShipCoordinates(a, 4, 3)));
-        System.out.println(player1board.checkIfValid(5,7));
+
+
+        display.printAskForStartingCoord();
+        int [] starterCoord = input.getShipPlacementStartingCoord();
+        display.printPossibleWays();
+        int way = input.getShipPlacementWay();
+        System.out.println(Arrays.deepToString(generateShipCoordinates(starterCoord, way, 3)));
+        System.out.println(validateCoords(generateShipCoordinates(starterCoord, way, 3)));
+
+
+
 
     }
 
@@ -79,6 +84,19 @@ public class Game {
             shipCoordinates[i][1] = starterCoord[1];
         }
         return shipCoordinates;
+    }
+
+    public boolean validateCoords(int [][] allCoords){    // TODO give player1 as arg
+        for(int [] coordPair:allCoords){
+            try {
+                if (player1board.checkIfValid(coordPair[0], coordPair[1])){
+                    return false;
+                }
+            }catch (Exception e){
+                return false;
+            }
+        }
+        return true;
     }
 
 }
