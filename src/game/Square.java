@@ -14,4 +14,9 @@ public class Square {
         yCoordinate = yCoord;
     }
 
+    @Override
+    public String toString() {
+        return squareStatus;
+    }
+
 }
