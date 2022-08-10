@@ -11,7 +11,7 @@ public class Display {
                     3. Exit""");
     }
 
-    public void printBoard(Board board) {
+    public void printBoard(Board board, boolean isPlacementPhase) {
         Square[][] ocean = board.getOcean();
         //StringBuilder header = new StringBuilder();
         for (int i = 1; i <= ocean[0].length; i++) {
@@ -23,7 +23,7 @@ public class Display {
             System.out.print((char) (i+65));
             //rowToDisplay.append((char) (i + 65)).append(" ");
             for (Square cell : ocean[i]) {
-                System.out.printf("%3s", cell.toString());
+                System.out.printf("%3s", cell.getCharacter(isPlacementPhase));
                 //rowToDisplay.append(cell.toString()).append(" ");
             }
             System.out.println();

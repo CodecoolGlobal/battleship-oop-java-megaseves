@@ -18,8 +18,11 @@ public class Square {
         return squareStatus;
     }
 
-    @Override
-    public String toString() {
+    public String getCharacter(boolean isPlacementPhase) {
+        if (getSquareStatus() == SquareStatus.SHIP) {
+            return isPlacementPhase ? squareStatus.character : SquareStatus.OCEAN.character;
+
+        }
         return squareStatus.character;
     }
 
