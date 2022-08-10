@@ -7,13 +7,13 @@ public class Ship {
 
     private List<Square> placeOfShip;
 
-    private final int length;
+    private final ShipType type;
 
     public Ship(ShipType type) {
-        this.length = type.length;
+        this.type = type;
     }
 
-    public int getLength() {return length;}
+    public ShipType getType() {return type;}
 
     public void placeShip(Square[] placeOfShip) {
         this.placeOfShip.addAll(Arrays.asList(placeOfShip));
