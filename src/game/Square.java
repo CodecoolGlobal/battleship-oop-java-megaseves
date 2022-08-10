@@ -2,14 +2,16 @@ package game;
 
 public class Square {
 
-    private int xCoordinate;
+    private final int xCoordinate;
 
-    private int yCoordinate;
+    private final int yCoordinate;
 
     private String squareStatus;
 
-    public Square() {
+    public Square(int xCoord, int yCoord) {
         this.squareStatus = SquareStatus.OCEAN.character;
+        xCoordinate = xCoord;
+        yCoordinate = yCoord;
     }
 
 }
