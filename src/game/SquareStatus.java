@@ -1,11 +1,11 @@
 package game;
 
 public enum SquareStatus {
-    OCEAN("U+1F30A"),
-    SHIP("U+1F6A2"),
-    MISS("U+1F4A6"),
-    SHOOT("U+1F525"),
-    SUNK("U+1F4A5");
+    OCEAN("\uD83C\uDF0A"),
+    SHIP("\uD83D\uDEA2"),
+    MISS("\uD83D\uDCA6"),
+    SHOOT("\uD83D\uDD25"),
+    SUNK("\uD83D\uDCA5");
 
     public final String character;
 
