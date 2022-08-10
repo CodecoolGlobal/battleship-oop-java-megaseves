@@ -8,9 +8,7 @@ public class Game {
 
     Square[][] currentBoard = board1.getOcean();
 
-    private void shoot(int[] coordinates) {
-        currentBoard[coordinates[0]][coordinates[1]].setSquareStatus(SquareStatus.SHOOT);
-    }
+
 
     private boolean checkWin() {return true;}
 
