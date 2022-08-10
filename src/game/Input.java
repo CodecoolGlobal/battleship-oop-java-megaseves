@@ -8,7 +8,7 @@ public class Input {
         while (true) {
             Scanner scanner = new Scanner(System.in);
             int input = scanner.nextInt();
-            if (input > 0 && input < 4) {
+            if (input > 0 && input < 4) {      //  TODO:   solve hardcode , set global instead of magicnumbers
                 return input;
             }
         }
