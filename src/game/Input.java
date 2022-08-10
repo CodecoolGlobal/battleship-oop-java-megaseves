@@ -5,6 +5,8 @@ import java.util.Scanner;
 public class Input {
     private final String alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 
+    private Display display = new Display();
+
 
     public int getInputforMenu() {
         while (true) {
@@ -17,7 +19,6 @@ public class Input {
     }
 
     public int[] getShipPlacement(){
-        Display display = new Display();
         while(true){
             try{
                 Scanner scanner = new Scanner(System.in);
@@ -31,6 +32,21 @@ public class Input {
                 }
                 display.printInvalidInput();
             } catch (Exception ignored){
+                display.printInvalidInput();
+            }
+        }
+    }
+
+    public int getShipPlacementWay(){
+        while (true) {
+            Scanner scanner = new Scanner(System.in);
+            try{
+                int input = scanner.nextInt();
+                if (input > 0 && input < 5) {
+                    return input;
+                }
+                display.printInvalidInput();
+            } catch (Exception e){
                 display.printInvalidInput();
             }
         }
