@@ -27,3 +27,4 @@ public class Board {
 
     public boolean isPlacementOk(int[] coordinates) {return true;}
 }
+

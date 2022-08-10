@@ -27,9 +27,10 @@ public class Display {
         System.out.println("""
                             Choose a way: 
                             1 - Up 
-                            2 - Down
-                            3 - Right
+                            2 - Right
+                            3 - Down
                             4 - Left
                                """);
     }
+
 }
