@@ -22,4 +22,14 @@ public class Display {
     public void printInvalidInput(){
         System.out.println("Invalid Input!");
     }
+
+    public void printPossibleWays(){
+        System.out.println("""
+                            Choose a way: 
+                            1 - Up 
+                            2 - Down
+                            3 - Right
+                            4 - Left
+                               """);
+    }
 }
