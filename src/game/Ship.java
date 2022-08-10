@@ -25,6 +25,9 @@ public class Ship {
                 return false;
             }
         }
+        for (Square square : placeOfShip) {
+            square.setSquareStatus(SquareStatus.SUNK);
+        }
         return true;
     }
 }

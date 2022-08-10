@@ -18,6 +18,10 @@ public class Square {
         return squareStatus;
     }
 
+    public void setSquareStatus(SquareStatus status) {
+        squareStatus = status;
+    }
+
     @Override
     public String toString() {
         return squareStatus.character;
