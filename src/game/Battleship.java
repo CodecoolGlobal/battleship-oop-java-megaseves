@@ -1,5 +1,7 @@
 package game;
 
+import java.util.Arrays;
+
 public class Battleship {
 
     public static void main(String[] args) {
