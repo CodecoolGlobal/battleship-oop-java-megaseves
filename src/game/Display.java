@@ -8,7 +8,9 @@ public class Display {
                 
                     1. New game
                     2. High scores
-                    3. Exit""");
+                    3. Exit
+                    """
+        );
     }
 
     public void printBoard() {}
@@ -16,4 +18,8 @@ public class Display {
     public void printGameplay() {}
 
     public void printResult() {}
+
+    public void printInvalidInput(){
+        System.out.println("Invalid Input!");
+    }
 }

@@ -17,6 +17,7 @@ public class Input {
     }
 
     public int[] getShipPlacement(){
+        Display display = new Display();
         while(true){
             try{
                 Scanner scanner = new Scanner(System.in);
@@ -28,9 +29,9 @@ public class Input {
                 if (firstConvertedCoord < 10 && firstConvertedCoord > 0 && secondConvertedCoord < 10){ //Todo make it dynamic, add table size
                     return new int[]{firstConvertedCoord, secondConvertedCoord};
                 }
-                System.out.println("Invalid input"); //Todo remove print from here
+                display.printInvalidInput();
             } catch (Exception ignored){
-                System.out.println("Invalid input"); //Todo remove print from here
+                display.printInvalidInput();
             }
         }
     }
