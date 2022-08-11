@@ -11,6 +11,8 @@ public class Game {
 
     private final Board player1board = new Board();
     private final Board player2board = new Board();
+    private final Player player1 = new Player();
+    private final Player player2 = new Player();
     Display display = new Display();
     Input input = new Input();
 
@@ -20,12 +22,18 @@ public class Game {
 
 
     public void initializeGame(){
-        display.printAskForStartingCoord();
-        int [] starterCoord = input.getShipPlacement();
-        display.printPossibleWays();
-        int way = input.getShipPlacementWay();
-        int[][] allShipCoordinates = generateShipCoordinates(starterCoord, way, 2);  // Todo: remove ship size magic number
-        System.out.println(validateCoords(allShipCoordinates));
+        for (Ship ship : player1.getPlayerShips()){
+            int shipSize = ship.getType().length;
+            boolean placementIsValid = false;
+            while (!placementIsValid){
+                display.printAskForStartingCoord();
+                int[] starterCoord = input.getShipPlacement();
+                display.printPossibleWays();
+                int way = input.getShipPlacementWay();
+                int[][] allShipCoordinates = generateShipCoordinates(starterCoord, way, shipSize);  // Todo: remove ship size magic number
+                placementIsValid = validateCoords(allShipCoordinates);
+            }
+        }
     }
 
     public void placementPhase(){

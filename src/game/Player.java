@@ -1,18 +1,20 @@
 package game;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.RandomAccess;
 
 public class Player {
 
-    private List<Ship> listOfShips;
+    private final ArrayList<Ship> listOfShips = new ArrayList<>();
 
     public Player() {
         for (ShipType type : ShipType.values()) {
-            listOfShips.add(new Ship(type));
+            this.listOfShips.add(new Ship(type));
         }
     }
 
-    public List<Ship> getPlayerShips() {return listOfShips;}
+    public ArrayList<Ship> getPlayerShips() {return listOfShips;}
 
     public void shoot(int[] coordinates, Square[][] ocean) {
         ocean[coordinates[0]][coordinates[1]].setSquareStatus(SquareStatus.SHOOT);
