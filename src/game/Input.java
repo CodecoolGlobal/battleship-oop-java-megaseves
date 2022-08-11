@@ -58,7 +58,6 @@ public class Input {
     public int getShipPlacementWay(){
         while (true) {
             Scanner scanner = new Scanner(System.in);
-            exitGame(scanner.nextLine());
             try{
                 int input = scanner.nextInt();
                 if (input > 0 && input < 5) {
