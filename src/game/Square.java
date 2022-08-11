@@ -8,10 +8,7 @@ public class Square {
 
     private SquareStatus squareStatus;
 
-    private String character;
-
     public Square(int xCoord, int yCoord) {
-        this.character = SquareStatus.OCEAN.character;
         this.squareStatus = SquareStatus.OCEAN;
         xCoordinate = xCoord;
         yCoordinate = yCoord;
@@ -21,9 +18,13 @@ public class Square {
         return squareStatus;
     }
 
+    public void setSquareStatus(SquareStatus status) {
+        squareStatus = status;
+    }
+
     @Override
     public String toString() {
-        return character;
+        return squareStatus.character;
     }
 
 }
