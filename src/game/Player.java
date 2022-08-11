@@ -7,10 +7,23 @@ public class Player {
     private String name;
     private final ArrayList<Ship> listOfShips = new ArrayList<>();
 
-    public Player(String name) {
-        for (ShipType type : ShipType.values()) {
-            this.listOfShips.add(new Ship(type));
+    public Player(int gameMode) {
+        if( gameMode == 5){
+            for (ShipType type : ShipType.values()) {
+                this.listOfShips.add(new Ship(type));
+            }
+        } else if (gameMode == 3) {
+            for (int i=0; i< gameMode; i++){
+                this.listOfShips.add(new Ship(ShipType.values()[i]));
+            }
+        } else if (gameMode == 1) {
+                this.listOfShips.add(new Ship(ShipType.values()[4]));
         }
+
+        this.name = "";
+    }
+
+    public void setName(String name) {
         this.name = name;
     }
 

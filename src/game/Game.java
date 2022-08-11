@@ -1,5 +1,7 @@
 package game;
 
+import java.util.concurrent.TimeUnit;
+
 public class Game {
 
     private Player round;
@@ -7,8 +9,7 @@ public class Game {
 
     private final Board player1board = new Board();
     private final Board player2board = new Board();
-    private final Player player1 = new Player("Marci"); //Todo: ez esetleg bekerheti inputkent
-    private final Player player2 = new Player("Lufi");
+
     Display display = new Display();
     Input input = new Input();
 
@@ -17,26 +18,50 @@ public class Game {
     private boolean checkWin(Player round) {return round.isAlive();}
 
 
-    public void initializeGame(){
-        placementPhase(player1, player1board);
-        placementPhase(player2, player2board);
+    public void initializeGame(Player player1, Player player2, int mode){
+        display.clearScreen();
+        display.askForName("player1");
+        player1.setName(input.getPlayerName());
+        display.clearScreen();
+        display.askForName("player2");
+        player2.setName(input.getPlayerName());
+        display.clearScreen();
+        display.printPlacementPhase();
+        display.stopTime(1);
+        placementPhase(player1, player1board, mode);
+        placementPhase(player2, player2board, mode);
     }
 
-    public void placementPhase(Player player, Board playerBoard){
-        display.printBoard(playerBoard);
-        display.printCurrentPlayer(player);
+    public void placementPhase(Player player, Board playerBoard, int mode){
+        int shipLeft = mode;
         for (Ship ship : player.getPlayerShips()){
+            display.clearScreen();
+            display.printCurrentPlayer(player);
+            display.printBoard(playerBoard);
             int shipSize = ship.getType().length;
+            display.numberOfShipsLeft(shipLeft, mode);
             display.currentShipSize(shipSize);
             int[][] allShipCoordinates = new int[shipSize][2];
             boolean placementIsValid = false;
-            while (!placementIsValid){
-                display.printAskForStartingCoord(); // Todo: print player name/id at start of placement round
-                int[] starterCoord = input.getShipPlacement();
+            while (!placementIsValid) {
+                boolean firstCoordValid = false;
+                int[] starterCoord = new int[0];
+                while (!firstCoordValid) {
+                    display.printAskForStartingCoord();
+                    starterCoord = input.getShipPlacement();
+                    if (validateSingleCoord(starterCoord, playerBoard)) {
+                        firstCoordValid = true;
+                    }else{
+                        display.printInvalidCoord();
+                    }
+                }
                 display.printPossibleWays();
                 int way = input.getShipPlacementWay();
-                allShipCoordinates = generateShipCoordinates(starterCoord, way, shipSize);  // Todo: remove ship size magic number
+                allShipCoordinates = generateShipCoordinates(starterCoord, way, shipSize);
                 placementIsValid = validateCoords(allShipCoordinates, playerBoard);
+                if (!placementIsValid) {
+                    display.printInvalidCoord();
+                }
             }
             for(int[] coordinate : allShipCoordinates){
                 Square currentSquare = playerBoard.getOcean()[coordinate[0]][coordinate[1]];
@@ -44,19 +69,29 @@ public class Game {
                 ship.linkSquare(currentSquare);
             }
             playerBoard.placeShip(allShipCoordinates);
+            display.clearScreen();
             display.printBoard(playerBoard);
+            shipLeft --;
         }
     }
 
-    public void play() {
-        initializeGame();
+
+
+    public void play(int mode) {
+        final Player player1 = new Player(mode);
+        final Player player2 = new Player(mode);
+        initializeGame(player1, player2, mode);
+        display.clearScreen();
+        display.printShootingPhase();
         this.round = player1;
         currentBoard = player2board;
         boolean isRunning = true;
         while (isRunning) {
-
             Square[][] ocean = currentBoard.getOcean();
-            display.printBoard(currentBoard);
+            display.stopTime(1);
+            display.clearScreen();
+            display.printCurrentPlayer(round);
+            display.printShootingBoard(currentBoard);
             boolean validShot = false;
             while (!validShot) {
                 int[] shootCoord;
@@ -72,17 +107,21 @@ public class Game {
                 }
                 if (!validShot) {display.printInvalidInput();}
             }
-            round = rotateRound(round);
+            display.clearScreen();
+            display.printShootingBoard(currentBoard);
+            round = rotateRound(round, player1, player2);
             currentBoard = rotateBoards(currentBoard);
             isRunning = checkWin(round);
         }
-        round = rotateRound(round);
+        round = rotateRound(round, player1, player2);
         currentBoard = rotateBoards(currentBoard);
-        display.printBoard(currentBoard);
+        display.clearScreen();
         display.printResult(round);
+        display.stopTime(4);
+        display.clearScreen();
     }
 
-    private Player rotateRound(Player round) {
+    private Player rotateRound(Player round, Player player1, Player player2) {
         return round == player1 ? player2 : player1;
     }
 
@@ -139,7 +178,7 @@ public class Game {
         return shipCoordinates;
     }
 
-    public boolean validateCoords(int [][] allCoords, Board playerBoard){    // TODO give player1 as arg
+    public boolean validateCoords(int [][] allCoords, Board playerBoard){
         boolean isValid = true;
         for(int [] coordPair:allCoords){
             try {
@@ -150,6 +189,18 @@ public class Game {
                 return false;
             }
         }
+        return isValid;
+    }
+
+    public boolean validateSingleCoord(int []coordPair, Board playerBoard){
+        boolean isValid = true;
+            try {
+                if (!playerBoard.checkIfValid(coordPair[0], coordPair[1])){
+                    isValid = false;
+                }
+            }catch (Exception e){
+                return false;
+            }
         return isValid;
     }
 

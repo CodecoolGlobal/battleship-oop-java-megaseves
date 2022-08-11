@@ -11,13 +11,21 @@ public class Input {
     private final int asciiCodeFor1 = 49;
 
 
+    public void exitGame(String input){
+        if (input.equalsIgnoreCase("exit") || input.equalsIgnoreCase("quit"))
+            System.exit(0);
+    }
+
+
     public int getInputforMenu() {
         while (true) {
             try {
                 Scanner scanner = new Scanner(System.in);
                 int input = scanner.nextInt();
-                if (input > 0 && input < 4) {      //  TODO:   solve hardcode , set global instead of magicnumbers
+                if (input > 0 && input < 5) {
                     return input;
+                }else {
+                    display.printInvalidInput();
                 }
             } catch (Exception e){
                 display.printInvalidInput();
@@ -30,6 +38,7 @@ public class Input {
             try{
                 Scanner scanner = new Scanner(System.in);
                 String input = scanner.nextLine();
+                exitGame(input);
                 char firstPartInput = Character.toUpperCase(input.charAt(0));
                 int secondPartInput = Integer.parseInt(input.substring(1));
                 int firstConvertedCoord = alphabet.indexOf(firstPartInput);
@@ -37,9 +46,11 @@ public class Input {
                 if (firstConvertedCoord < 10 && firstConvertedCoord >= 0 && secondConvertedCoord < 10){ //Todo make it dynamic, add table size
                     return new int[]{firstConvertedCoord, secondConvertedCoord};
                 }
-                display.printInvalidInput();
+                display.printInvalidCoord();
+                display.printAskForStartingCoord();
             } catch (Exception ignored){
-                display.printInvalidInput();
+                display.printInvalidCoord();
+                display.printAskForStartingCoord();
             }
         }
     }
@@ -47,6 +58,7 @@ public class Input {
     public int getShipPlacementWay(){
         while (true) {
             Scanner scanner = new Scanner(System.in);
+            exitGame(scanner.nextLine());
             try{
                 int input = scanner.nextInt();
                 if (input > 0 && input < 5) {
@@ -59,11 +71,11 @@ public class Input {
         }
     }
 
-    private boolean validateInput() {return true;}
 
     public int[] getShootCoord(int boardSize) {
         Scanner scanner = new Scanner(System.in);
         String input = scanner.next().toUpperCase();
+        exitGame(input);
         try {
             int inputFirstIndex = ((int) Character.toUpperCase(input.charAt(0))) - asciiCodeForA;
             int inputSecondIndex = Integer.parseInt(input.substring(1)) - 1;
@@ -83,5 +95,10 @@ public class Input {
             return false;
         }
         return true;
+    }
+
+    public String getPlayerName() {
+        Scanner scanner = new Scanner(System.in);
+        return scanner.nextLine();
     }
 }

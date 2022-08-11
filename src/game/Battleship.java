@@ -1,6 +1,5 @@
 package game;
 
-import java.util.Arrays;
 
 public class Battleship {
 
@@ -13,9 +12,14 @@ public class Battleship {
             display.printMenu();
             int inputForMenu = input.getInputforMenu();
             switch (inputForMenu) {
-                case 1 -> game.play();
-                case 2 -> System.out.println("Print Highscore");
-                case 3 -> programIsRunning = false;
+                case 1: game.play(5);
+                        break;
+                case 2: game.play(3);
+                    break;
+                case 3 : game.play(1);
+                    break;
+                case 4 : programIsRunning = false;
+                    break;
             }
         }
     }
