@@ -57,4 +57,23 @@ public class Input {
     }
 
     private boolean validateInput() {return true;}
+
+    public int[] getShootCoord(int boardSize) {
+        Scanner scanner = new Scanner(System.in);
+        String input = scanner.next().toLowerCase();
+        return validateInputCoord(input, boardSize) ? new int[] {input.charAt(0) - 1, input.charAt(1) -1} : new int[] {};
+    }
+
+    private boolean validateInputCoord(String input, int boardSize) {
+        if (input.length() != 2) {
+            return false;
+        }
+        if(input.charAt(0) - 97 < 0 || (input.charAt(0)) - 97 > boardSize) {
+            return false;
+        }
+        if(input.charAt(1) > boardSize) {
+            return false;
+        }
+        return true;
+    }
 }

@@ -54,4 +54,8 @@ public class Display {
     public void printAskForStartingCoord(){
         System.out.println("Give a starting coord");
     }
+
+    public void askForShot() {
+        System.out.println("Please choose a coordinate to shoot!");
+    }
 }

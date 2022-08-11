@@ -6,8 +6,8 @@ import java.util.Arrays;
 
 public class Game {
 
-    private int round;
-
+    private Player round;
+    private Board currentBoard;
 
     private final Board player1board = new Board();
     private final Board player2board = new Board();
@@ -33,6 +33,37 @@ public class Game {
                 int[][] allShipCoordinates = generateShipCoordinates(starterCoord, way, shipSize);  // Todo: remove ship size magic number
                 placementIsValid = validateCoords(allShipCoordinates);
             }
+        }
+    }
+
+    public void play() {
+        this.round = player1;
+        currentBoard = player2board;
+        boolean isRunning = true;
+        while (isRunning) {
+            Square[][] ocean = currentBoard.getOcean();
+            display.printBoard(currentBoard);
+            boolean validShot = false;
+            while (!validShot) {
+                int[] shootCoord;
+                display.askForShot();
+                shootCoord = input.getShootCoord(ocean.length);
+                if (shootCoord.length == 2) {
+                    if (ocean[shootCoord[0]][shootCoord[1]].getSquareStatus() == SquareStatus.SHIP ||
+                            ocean[shootCoord[0]][shootCoord[1]].getSquareStatus() == SquareStatus.OCEAN) {
+                        validShot = true;
+                        round.shoot(shootCoord, ocean);
+                    }
+                }
+            }
+            if (round == player1) {
+                round = player2;
+                currentBoard = player1board;
+            } else {
+                round = player1;
+                currentBoard = player2board;
+            }
+
         }
     }
 
