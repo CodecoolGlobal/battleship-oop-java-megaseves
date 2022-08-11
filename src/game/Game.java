@@ -9,8 +9,8 @@ public class Game {
     private int round;
 
 
-    private Board player1board = new Board();
-    private Board player2board = new Board();
+    private final Board player1board = new Board();
+    private final Board player2board = new Board();
     Display display = new Display();
     Input input = new Input();
 
@@ -20,18 +20,12 @@ public class Game {
 
 
     public void initializeGame(){
-
-
         display.printAskForStartingCoord();
-        int [] starterCoord = input.getShipPlacementStartingCoord();
+        int [] starterCoord = input.getShipPlacement();
         display.printPossibleWays();
         int way = input.getShipPlacementWay();
-        System.out.println(Arrays.deepToString(generateShipCoordinates(starterCoord, way, 3)));
-        System.out.println(validateCoords(generateShipCoordinates(starterCoord, way, 3)));
-
-
-
-
+        int[][] allShipCoordinates = generateShipCoordinates(starterCoord, way, 2);  // Todo: remove ship size magic number
+        System.out.println(validateCoords(allShipCoordinates));
     }
 
     public void placementPhase(){
@@ -87,16 +81,17 @@ public class Game {
     }
 
     public boolean validateCoords(int [][] allCoords){    // TODO give player1 as arg
+        boolean isValid = true;
         for(int [] coordPair:allCoords){
             try {
-                if (player1board.checkIfValid(coordPair[0], coordPair[1])){
-                    return false;
+                if (!player1board.checkIfValid(coordPair[0], coordPair[1])){
+                    isValid = false;
                 }
             }catch (Exception e){
                 return false;
             }
         }
-        return true;
+        return isValid;
     }
 
 }
