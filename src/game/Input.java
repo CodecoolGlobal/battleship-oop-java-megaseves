@@ -57,4 +57,9 @@ public class Input {
     }
 
     private boolean validateInput() {return true;}
+
+    public String getPlayerName() {
+        Scanner scanner = new Scanner(System.in);
+        return scanner.nextLine();
+    }
 }

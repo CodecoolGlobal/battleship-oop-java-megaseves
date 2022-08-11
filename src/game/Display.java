@@ -66,4 +66,8 @@ public class Display {
     public void printCoordinateIsInvalid(){
         System.out.println("Invalid coordinate( Already taken or Out of board )");
     }
+
+    public void askForName() {
+        System.out.println("Please choose a name!");
+    }
 }

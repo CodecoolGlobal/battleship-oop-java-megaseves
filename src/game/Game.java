@@ -7,8 +7,7 @@ public class Game {
 
     private final Board player1board = new Board();
     private final Board player2board = new Board();
-    private final Player player1 = new Player("Marci"); //Todo: ez esetleg bekerheti inputkent
-    private final Player player2 = new Player("Lufi");
+
     Display display = new Display();
     Input input = new Input();
 
@@ -18,6 +17,12 @@ public class Game {
 
 
     public void initializeGame(){
+        display.askForName();
+        String player1name = input.getPlayerName();
+        display.askForName();
+        String player2name = input.getPlayerName();
+        final Player player1 = new Player(player1name);
+        final Player player2 = new Player(player2name);
         placementPhase(player1, player1board);
         placementPhase(player2, player2board);
     }
@@ -30,11 +35,11 @@ public class Game {
             int[][] allShipCoordinates = new int[shipSize][2];
             boolean placementIsValid = false;
             while (!placementIsValid){
-                display.printAskForStartingCoord(); // Todo: print player name/id at start of placement round
+                display.printAskForStartingCoord();
                 int[] starterCoord = input.getShipPlacement();
                 display.printPossibleWays();
                 int way = input.getShipPlacementWay();
-                allShipCoordinates = generateShipCoordinates(starterCoord, way, shipSize);  // Todo: remove ship size magic number
+                allShipCoordinates = generateShipCoordinates(starterCoord, way, shipSize);
                 placementIsValid = validateCoords(allShipCoordinates, playerBoard);
                 if (!placementIsValid) display.printCoordinateIsInvalid();
             }
