@@ -43,7 +43,7 @@ public class Display {
 
     public void printPossibleWays(){
         System.out.println("""
-                            Choose a way: 
+                            Choose a way:
                             1 - Up 
                             2 - Right
                             3 - Down
@@ -61,5 +61,9 @@ public class Display {
 
     public void currentShipSize(int shipSize) {
         System.out.println("Next ship is " + shipSize + " long");
+    }
+
+    public void printCoordinateIsInvalid(){
+        System.out.println("Invalid coordinate( Already taken or Out of board )");
     }
 }

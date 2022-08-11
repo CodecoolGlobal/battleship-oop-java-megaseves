@@ -36,6 +36,7 @@ public class Game {
                 int way = input.getShipPlacementWay();
                 allShipCoordinates = generateShipCoordinates(starterCoord, way, shipSize);  // Todo: remove ship size magic number
                 placementIsValid = validateCoords(allShipCoordinates, playerBoard);
+                if (!placementIsValid) display.printCoordinateIsInvalid();
             }
             for(int[] coordinate : allShipCoordinates){
                 Square currentSquare = playerBoard.getOcean()[coordinate[0]][coordinate[1]];
