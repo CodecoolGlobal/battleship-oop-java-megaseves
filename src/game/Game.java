@@ -14,7 +14,7 @@ public class Game {
 
     private void shoot(int[] coordinates) {}
 
-    private boolean checkWin() {return true;}
+    private boolean checkWin(Player round) {return round.isAlive();}
 
 
     public void initializeGame(){
@@ -23,6 +23,7 @@ public class Game {
     }
 
     public void placementPhase(Player player, Board playerBoard){
+        display.printBoard(playerBoard);
         display.printCurrentPlayer(player);
         for (Ship ship : player.getPlayerShips()){
             int shipSize = ship.getType().length;
@@ -45,14 +46,15 @@ public class Game {
             playerBoard.placeShip(allShipCoordinates);
             display.printBoard(playerBoard);
         }
-        }
     }
 
     public void play() {
+        initializeGame();
         this.round = player1;
         currentBoard = player2board;
         boolean isRunning = true;
         while (isRunning) {
+
             Square[][] ocean = currentBoard.getOcean();
             display.printBoard(currentBoard);
             boolean validShot = false;
@@ -61,27 +63,33 @@ public class Game {
                 display.askForShot();
                 shootCoord = input.getShootCoord(ocean.length);
                 if (shootCoord.length == 2) {
-                    if (ocean[shootCoord[0]][shootCoord[1]].getSquareStatus() == SquareStatus.SHIP ||
-                            ocean[shootCoord[0]][shootCoord[1]].getSquareStatus() == SquareStatus.OCEAN) {
+                    Square shootSquare = ocean[shootCoord[0]][shootCoord[1]];
+                    if (shootSquare.getSquareStatus() == SquareStatus.SHIP ||
+                            shootSquare.getSquareStatus() == SquareStatus.OCEAN) {
                         validShot = true;
-                        round.shoot(shootCoord, ocean);
+                        round.shoot(shootSquare);
                     }
                 }
+                if (!validShot) {display.printInvalidInput();}
             }
-            if (round == player1) {
-                round = player2;
-                currentBoard = player1board;
-            } else {
-                round = player1;
-                currentBoard = player2board;
-            }
-
+            round = rotateRound(round);
+            currentBoard = rotateBoards(currentBoard);
+            isRunning = checkWin(round);
         }
+        round = rotateRound(round);
+        currentBoard = rotateBoards(currentBoard);
+        display.printBoard(currentBoard);
+        display.printResult(round);
     }
 
-    public void placementPhase(){
-
+    private Player rotateRound(Player round) {
+        return round == player1 ? player2 : player1;
     }
+
+    private Board rotateBoards(Board currentBoard) {
+        return currentBoard == player1board ? player2board : player1board;
+    }
+
 
     public int [] []generateShipCoordinates (int [] starterCoord, int way, int shipSize){
         switch(way){

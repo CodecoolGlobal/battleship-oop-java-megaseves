@@ -35,7 +35,9 @@ public class Display {
 
     public void printGameplay() {}
 
-    public void printResult() {}
+    public void printResult(Player player) {
+        System.out.println(player.getName() + " has won!");
+    }
 
     public void printInvalidInput(){
         System.out.println("Invalid Input!");

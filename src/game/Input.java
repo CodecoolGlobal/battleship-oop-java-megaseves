@@ -7,6 +7,9 @@ public class Input {
 
     private final Display display = new Display();
 
+    private final int asciiCodeForA = 65;
+    private final int asciiCodeFor1 = 49;
+
 
     public int getInputforMenu() {
         while (true) {
@@ -60,18 +63,23 @@ public class Input {
 
     public int[] getShootCoord(int boardSize) {
         Scanner scanner = new Scanner(System.in);
-        String input = scanner.next().toLowerCase();
-        return validateInputCoord(input, boardSize) ? new int[] {input.charAt(0) - 1, input.charAt(1) -1} : new int[] {};
+        String input = scanner.next().toUpperCase();
+        try {
+            int inputFirstIndex = ((int) Character.toUpperCase(input.charAt(0))) - asciiCodeForA;
+            int inputSecondIndex = Integer.parseInt(input.substring(1)) - 1;
+            int[] shootCoords = new int[] {inputFirstIndex, inputSecondIndex};
+            return validateInputCoord(shootCoords, boardSize) ?
+                    new int[] {inputFirstIndex, inputSecondIndex} : new int[] {};
+        } catch (Exception ignored) {
+            return new int[] {};
+        }
     }
 
-    private boolean validateInputCoord(String input, int boardSize) {
-        if (input.length() != 2) {
+    private boolean validateInputCoord(int[] coords, int boardSize) {
+        if(coords[0] < 0 || coords[0] >= boardSize) {
             return false;
         }
-        if(input.charAt(0) - 97 < 0 || (input.charAt(0)) - 97 > boardSize) {
-            return false;
-        }
-        if(input.charAt(1) > boardSize) {
+        if(coords[1] >= boardSize) {
             return false;
         }
         return true;
