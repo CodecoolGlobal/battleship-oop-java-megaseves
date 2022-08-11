@@ -58,4 +58,12 @@ public class Display {
     public void askForShot() {
         System.out.println("Please choose a coordinate to shoot!");
     }
+
+    public void printCurrentPlayer(Player player) {
+        System.out.println("This is " + player.getName() + "'s turn.");
+    }
+
+    public void currentShipSize(int shipSize) {
+        System.out.println("Next ship is " + shipSize + " long");
+    }
 }

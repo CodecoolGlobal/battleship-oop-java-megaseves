@@ -17,7 +17,11 @@ public class Board {
         return ocean;
     }
 
-
+    public void placeShip(int[][] shipCoordinates) {
+        for(int[] coordinate : shipCoordinates){
+            ocean[coordinate[0]][coordinate[1]].setSquareStatus(SquareStatus.SHIP);
+        }
+    }
 
     public boolean checkIfValid(int x, int y){
         return ocean[x][y].getSquareStatus() != SquareStatus.SHIP;

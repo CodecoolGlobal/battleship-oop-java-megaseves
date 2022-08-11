@@ -1,9 +1,5 @@
 package game;
 
-import java.lang.reflect.Array;
-import java.util.ArrayList;
-import java.util.Arrays;
-
 public class Game {
 
     private Player round;
@@ -11,8 +7,8 @@ public class Game {
 
     private final Board player1board = new Board();
     private final Board player2board = new Board();
-    private final Player player1 = new Player();
-    private final Player player2 = new Player();
+    private final Player player1 = new Player("Marci"); //Todo: ez esetleg bekerheti inputkent
+    private final Player player2 = new Player("Lufi");
     Display display = new Display();
     Input input = new Input();
 
@@ -22,17 +18,33 @@ public class Game {
 
 
     public void initializeGame(){
-        for (Ship ship : player1.getPlayerShips()){
+        placementPhase(player1, player1board);
+        placementPhase(player2, player2board);
+    }
+
+    public void placementPhase(Player player, Board playerBoard){
+        display.printCurrentPlayer(player);
+        for (Ship ship : player.getPlayerShips()){
             int shipSize = ship.getType().length;
+            display.currentShipSize(shipSize);
+            int[][] allShipCoordinates = new int[shipSize][2];
             boolean placementIsValid = false;
             while (!placementIsValid){
-                display.printAskForStartingCoord();
+                display.printAskForStartingCoord(); // Todo: print player name/id at start of placement round
                 int[] starterCoord = input.getShipPlacement();
                 display.printPossibleWays();
                 int way = input.getShipPlacementWay();
-                int[][] allShipCoordinates = generateShipCoordinates(starterCoord, way, shipSize);  // Todo: remove ship size magic number
-                placementIsValid = validateCoords(allShipCoordinates);
+                allShipCoordinates = generateShipCoordinates(starterCoord, way, shipSize);  // Todo: remove ship size magic number
+                placementIsValid = validateCoords(allShipCoordinates, playerBoard);
             }
+            for(int[] coordinate : allShipCoordinates){
+                Square currentSquare = playerBoard.getOcean()[coordinate[0]][coordinate[1]];
+                currentSquare.setSquareStatus(SquareStatus.SHIP);
+                ship.linkSquare(currentSquare);
+            }
+            playerBoard.placeShip(allShipCoordinates);
+            display.printBoard(playerBoard);
+        }
         }
     }
 
@@ -119,11 +131,11 @@ public class Game {
         return shipCoordinates;
     }
 
-    public boolean validateCoords(int [][] allCoords){    // TODO give player1 as arg
+    public boolean validateCoords(int [][] allCoords, Board playerBoard){    // TODO give player1 as arg
         boolean isValid = true;
         for(int [] coordPair:allCoords){
             try {
-                if (!player1board.checkIfValid(coordPair[0], coordPair[1])){
+                if (!playerBoard.checkIfValid(coordPair[0], coordPair[1])){
                     isValid = false;
                 }
             }catch (Exception e){
