@@ -1,20 +1,21 @@
 package game;
 
 import java.util.ArrayList;
-import java.util.List;
-import java.util.RandomAccess;
 
 public class Player {
 
+    private String name;
     private final ArrayList<Ship> listOfShips = new ArrayList<>();
 
-    public Player() {
+    public Player(String name) {
         for (ShipType type : ShipType.values()) {
             this.listOfShips.add(new Ship(type));
         }
+        this.name = name;
     }
 
     public ArrayList<Ship> getPlayerShips() {return listOfShips;}
+
 
     public void shoot(int[] coordinates, Square[][] ocean) {
         ocean[coordinates[0]][coordinates[1]].setSquareStatus(SquareStatus.SHOOT);
@@ -27,5 +28,9 @@ public class Player {
             }
         }
         return false;
+    }
+
+    public String getName() {
+        return name;
     }
 }

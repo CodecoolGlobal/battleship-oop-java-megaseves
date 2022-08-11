@@ -54,4 +54,12 @@ public class Display {
     public void printAskForStartingCoord(){
         System.out.println("Give a starting coord");
     }
+
+    public void printCurrentPlayer(Player player) {
+        System.out.println("This is " + player.getName() + "'s turn.");
+    }
+
+    public void currentShipSize(int shipSize) {
+        System.out.println("Next ship is " + shipSize + " long");
+    }
 }
