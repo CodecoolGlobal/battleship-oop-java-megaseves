@@ -31,7 +31,7 @@ public class Input {
                 int secondPartInput = Integer.parseInt(input.substring(1));
                 int firstConvertedCoord = alphabet.indexOf(firstPartInput);
                 int secondConvertedCoord = secondPartInput - 1;
-                if (firstConvertedCoord < 10 && firstConvertedCoord >= 0 && secondConvertedCoord < 10){ //Todo make it dynamic, add table size
+                if (firstConvertedCoord < 10 && firstConvertedCoord >= 0 && secondConvertedCoord < 10 && secondConvertedCoord > 0){
                     return new int[]{firstConvertedCoord, secondConvertedCoord};
                 }
                 display.printInvalidInput();
