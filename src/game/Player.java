@@ -39,12 +39,13 @@ public class Player {
     }
 
     public boolean isAlive() {
+        boolean playerAlive = false;
         for (Ship ship : listOfShips) {
             if (!ship.hasSunk()) {
-                return true;
+                playerAlive = true;
             }
         }
-        return false;
+        return playerAlive;
     }
 
     public String getName() {

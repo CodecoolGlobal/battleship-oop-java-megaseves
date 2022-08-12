@@ -18,7 +18,7 @@ public class Game {
     private boolean checkWin(Player round) {return round.isAlive();}
 
 
-    public void initializeGame(Player player1, Player player2, int mode){
+    private void initializeGame(Player player1, Player player2, int mode){
         display.clearScreen();
         display.askForName("player1");
         player1.setName(input.getPlayerName());
@@ -32,7 +32,7 @@ public class Game {
         placementPhase(player2, player2board, mode);
     }
 
-    public void placementPhase(Player player, Board playerBoard, int mode){
+    private void placementPhase(Player player, Board playerBoard, int mode){
         int shipLeft = mode;
         for (Ship ship : player.getPlayerShips()){
             display.clearScreen();
@@ -130,7 +130,7 @@ public class Game {
     }
 
 
-    public int [] []generateShipCoordinates (int [] starterCoord, int way, int shipSize){
+    private int [] []generateShipCoordinates (int [] starterCoord, int way, int shipSize){
         switch(way){
             case 1: return generateShipCoordinatesUp(starterCoord, shipSize);
             case 2: return generateShipCoordinatesRight(starterCoord, shipSize);
@@ -142,7 +142,7 @@ public class Game {
         }
     }
 
-    public int [] []generateShipCoordinatesRight(int [] starterCoord, int shipSize){
+    private int [] []generateShipCoordinatesRight(int [] starterCoord, int shipSize){
         int [] []   shipCoordinates = new int[shipSize][2];
         for (int i=0; i<shipSize; i++){
             shipCoordinates[i][0] = starterCoord[0];
@@ -151,7 +151,7 @@ public class Game {
         return shipCoordinates;
     }
 
-    public int [] [] generateShipCoordinatesUp(int [] starterCoord, int shipSize){
+    private int [] [] generateShipCoordinatesUp(int [] starterCoord, int shipSize){
         int [] []   shipCoordinates = new int[shipSize][2];
         for (int i=0; i<shipSize; i++){
             shipCoordinates[i][0] = starterCoord[0] - i;
@@ -169,7 +169,7 @@ public class Game {
         return shipCoordinates;
     }
 
-    public int [] [] generateShipCoordinatesDown(int [] starterCoord, int shipSize){
+    private int [] [] generateShipCoordinatesDown(int [] starterCoord, int shipSize){
         int [] []   shipCoordinates = new int[shipSize][2];
         for (int i=0; i<shipSize; i++){
             shipCoordinates[i][0] = starterCoord[0] + i;
@@ -178,7 +178,7 @@ public class Game {
         return shipCoordinates;
     }
 
-    public boolean validateCoords(int [][] allCoords, Board playerBoard){
+    private boolean validateCoords(int [][] allCoords, Board playerBoard){
         boolean isValid = true;
         for(int [] coordPair:allCoords){
             try {
@@ -192,7 +192,7 @@ public class Game {
         return isValid;
     }
 
-    public boolean validateSingleCoord(int []coordPair, Board playerBoard){
+    private boolean validateSingleCoord(int []coordPair, Board playerBoard){
         boolean isValid = true;
             try {
                 if (!playerBoard.checkIfValid(coordPair[0], coordPair[1])){
