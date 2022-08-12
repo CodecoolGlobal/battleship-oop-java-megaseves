@@ -87,8 +87,8 @@ public class Display {
         System.out.println("Next ship is " + shipSize + " long");
     }
 
-    public void askForName(String player) {
-        System.out.println("Please give your name: " + player + "!");
+    public void askForName() {
+        System.out.println("Please give your name!");
     }
 
     public void printInvalidCoord() {

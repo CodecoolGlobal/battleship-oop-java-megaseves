@@ -5,6 +5,8 @@ import java.util.ArrayList;
 public class Player {
 
     private String name;
+
+    private Board board;
     private final ArrayList<Ship> listOfShips = new ArrayList<>();
 
     public Player(int gameMode) {
@@ -19,13 +21,16 @@ public class Player {
         } else if (gameMode == 1) {
                 this.listOfShips.add(new Ship(ShipType.values()[4]));
         }
-
+        this.board = new Board();
         this.name = "";
     }
 
     public void setName(String name) {
         this.name = name;
     }
+
+    public Board getBoard() {return this.board;}
+    public String getName() {return name;}
 
     public ArrayList<Ship> getPlayerShips() {return listOfShips;}
 
@@ -48,7 +53,4 @@ public class Player {
         return playerAlive;
     }
 
-    public String getName() {
-        return name;
-    }
 }
