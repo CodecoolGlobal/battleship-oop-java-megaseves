@@ -55,12 +55,12 @@ public class Input {
         }
     }
 
-    public int getShipPlacementWay(){
+    public int getShipPlacementWay(Square[][] possibleDirections) {
         while (true) {
             Scanner scanner = new Scanner(System.in);
             try{
                 int input = scanner.nextInt();
-                if (input > 0 && input < 5) {
+                if (possibleDirections[input - 1] != null) {
                     return input;
                 }
                 display.printInvalidInput();

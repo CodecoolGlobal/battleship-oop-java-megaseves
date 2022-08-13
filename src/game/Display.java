@@ -1,5 +1,6 @@
 package game;
 
+import java.util.Arrays;
 import java.util.concurrent.TimeUnit;
 
 public class Display {
@@ -63,12 +64,16 @@ public class Display {
         System.out.println("Invalid Input!");
     }
 
-    public void printPossibleWays(){
-        System.out.println("Choose a way:\n" +
-                           "1 - Up\n" +
-                           "2 - Right\n" +
-                           "3 - Down\n" +
-                           "4 - Left\n");
+    public void printPossibleWays(Square[][] possibleDirections, String[]directions){
+        StringBuilder possibleWays = new StringBuilder("Choose a way:\n");
+        for (int i = 0; i < possibleDirections.length; i++) {
+            System.out.println(Arrays.toString(possibleDirections[i]));
+            if ( possibleDirections[i] != null) {
+                possibleWays.append(i+1).append(" - ").append(directions[i]);
+            }
+            possibleWays.append("\n");
+        }
+        System.out.println(possibleWays);
     }
 
     public void printAskForStartingCoord(){
