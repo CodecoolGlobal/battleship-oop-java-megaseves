@@ -22,9 +22,9 @@ public class Square {
         squareStatus = status;
     }
 
-    @Override
-    public String toString() {
-        return squareStatus.character;
+    public String getCharacter(boolean isPlacementPhase) {
+        if (isPlacementPhase) {return squareStatus.character;}
+        return squareStatus == SquareStatus.SHIP ? SquareStatus.OCEAN.character : squareStatus.character;
     }
 
 }

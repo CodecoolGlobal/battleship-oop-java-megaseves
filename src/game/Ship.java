@@ -16,8 +16,11 @@ public class Ship {
 
     public ShipType getType() {return type;}
 
-    public void linkSquare(Square currentSquare) {
-        this.shipSquares.addAll(Arrays.asList(currentSquare));
+    public void placeShip(Square[] squares) {
+        for (Square square : squares) {
+            square.setSquareStatus(SquareStatus.SHIP);
+            shipSquares.add(square);
+        }
     }
 
     public boolean hasSunk() {

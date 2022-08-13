@@ -1,62 +1,67 @@
 package game;
 
+import java.util.Arrays;
+import java.util.concurrent.TimeUnit;
+
 public class Display {
 
     public void printMenu() {
-        System.out.println("""
-                Welcome to Battleships!
-                
-                    1. New game
-                    2. High scores
-                    3. Exit
-                    """
+        System.out.println("Welcome to Battleships!\n" +
+                           "\n" +
+                           "    1. Easy Mode\n" +
+                           "    2. Normal Mode\n" +
+                           "    3. Hard Mode\n" +
+                           "    4. Exit\n"
         );
     }
 
-    public void printBoard(Board board) {
+    public void printBoard(Board board, boolean isPlacementPhase) {
         Square[][] ocean = board.getOcean();
-        //StringBuilder header = new StringBuilder();
         for (int i = 1; i <= ocean[0].length; i++) {
             System.out.printf("%3d", i);
         }
         System.out.println();
         for (int i = 0; i < ocean.length; i++) {
-            //StringBuilder rowToDisplay = new StringBuilder();
             System.out.print((char) (i+65));
-            //rowToDisplay.append((char) (i + 65)).append(" ");
             for (Square cell : ocean[i]) {
-                System.out.printf("%3s", cell.toString());
-                //rowToDisplay.append(cell.toString()).append(" ");
+                System.out.printf("%3s", cell.getCharacter(isPlacementPhase));
             }
             System.out.println();
-            //System.out.println(rowToDisplay);
         }
     }
 
     public void printGameplay() {}
 
-    public void printResult() {}
+    public void printResult(Player player) {
+        System.out.println("\n" + player.getName() + " has won!" + "\n" );
+    }
 
     public void printInvalidInput(){
         System.out.println("Invalid Input!");
     }
 
-    public void printPossibleWays(){
-        System.out.println("""
-                            Choose a way:
-                            1 - Up 
-                            2 - Right
-                            3 - Down
-                            4 - Left
-                               """);
+    public void printPossibleWays(Square[][] possibleDirections, String[]directions){
+        StringBuilder possibleWays = new StringBuilder("Choose a way:\n");
+        for (int i = 0; i < possibleDirections.length; i++) {
+            System.out.println(Arrays.toString(possibleDirections[i]));
+            if ( possibleDirections[i] != null) {
+                possibleWays.append(i+1).append(" - ").append(directions[i]);
+            }
+            possibleWays.append("\n");
+        }
+        System.out.println(possibleWays);
     }
 
     public void printAskForStartingCoord(){
         System.out.println("Give a starting coord");
     }
 
+    public void askForShot() {
+        System.out.println("Please choose a coordinate to shoot!");
+    }
+
     public void printCurrentPlayer(Player player) {
-        System.out.println("This is " + player.getName() + "'s turn.");
+        System.out.println("This is " + player.getName() + "'s turn. \n \n");
     }
 
     public void currentShipSize(int shipSize) {
@@ -69,5 +74,39 @@ public class Display {
 
     public void askForName() {
         System.out.println("Please choose a name!");
+    }
+
+    public void askForName() {
+        System.out.println("Please give your name!");
+    }
+
+    public void printInvalidCoord() {
+        System.out.println("The given Coord is out of board or already taken!");
+    }
+
+    public void printShootingPhase() {
+        System.out.println("SHOOTING PHASE ! ");
+    }
+
+    public void clearScreen(){
+        System.out.print("\033[H\033[2J");
+        System.out.flush();
+    }
+
+
+    public void stopTime(int howManySecond){
+        try {
+            TimeUnit.SECONDS.sleep(howManySecond);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public void printPlacementPhase() {
+        System.out.println("PLACEMENT PHASE");
+    }
+
+    public void numberOfShipsLeft( int shipLeft, int mode) {
+        System.out.println(shipLeft + "/" + mode + " ship(s) can be placed!");
     }
 }
