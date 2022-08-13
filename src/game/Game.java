@@ -3,8 +3,8 @@ package game;
 public class Game {
 
     private Player[] players;
-    Display display = new Display();
-    Input input = new Input();
+    private Display display = new Display();
+    private Input input = new Input();
 
     private boolean checkWin(Player round) {return round.isAlive();}
 

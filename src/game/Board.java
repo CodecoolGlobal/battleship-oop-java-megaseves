@@ -46,7 +46,7 @@ public class Board {
         return possibleDirections;
     }
 
-    public boolean isPlacementOk(int coordX, int coordY) {
+    private boolean isPlacementOk(int coordX, int coordY) {
         if (coordX < 0 || coordX >= ocean.length || coordY < 0 || coordY >= ocean.length) {
             return false;
         }
