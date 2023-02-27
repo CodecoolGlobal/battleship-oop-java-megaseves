@@ -1,4 +1,4 @@
-package game;
+package com.codecool.Battleship;
 
 import java.util.Arrays;
 import java.util.concurrent.TimeUnit;
@@ -72,9 +72,6 @@ public class Display {
         System.out.println("Invalid coordinate( Already taken or Out of board )");
     }
 
-    public void askForName() {
-        System.out.println("Please choose a name!");
-    }
 
     public void askForName() {
         System.out.println("Please give your name!");

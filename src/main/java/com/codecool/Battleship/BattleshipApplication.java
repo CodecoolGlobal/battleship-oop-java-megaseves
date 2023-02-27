@@ -1,9 +1,13 @@
-package game;
+package com.codecool.Battleship;
 
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-public class Battleship {
+@SpringBootApplication
+public class BattleshipApplication {
 
     public static void main(String[] args) {
+        SpringApplication.run(BattleshipApplication.class, args);
         boolean programIsRunning = true;
         Display display = new Display();
         Input input = new Input();

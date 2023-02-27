@@ -1,4 +1,4 @@
-package game;
+package com.codecool.Battleship;
 
 public class Game {
 
