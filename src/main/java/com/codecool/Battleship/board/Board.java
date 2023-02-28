@@ -1,4 +1,4 @@
-package com.codecool.Battleship;
+package com.codecool.Battleship.board;
 
 public class Board {
 

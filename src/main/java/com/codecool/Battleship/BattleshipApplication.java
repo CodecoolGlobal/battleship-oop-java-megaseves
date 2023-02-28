@@ -1,5 +1,8 @@
 package com.codecool.Battleship;
 
+import com.codecool.Battleship.game.Display;
+import com.codecool.Battleship.game.Game;
+import com.codecool.Battleship.game.Input;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 

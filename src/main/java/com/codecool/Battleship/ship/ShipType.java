@@ -1,4 +1,4 @@
-package com.codecool.Battleship;
+package com.codecool.Battleship.ship;
 
 public enum ShipType {
 

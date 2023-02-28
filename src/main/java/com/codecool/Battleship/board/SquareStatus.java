@@ -1,4 +1,4 @@
-package com.codecool.Battleship;
+package com.codecool.Battleship.board;
 
 public enum SquareStatus {
     OCEAN("\uD83C\uDF0A"),

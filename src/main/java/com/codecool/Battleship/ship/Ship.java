@@ -1,8 +1,9 @@
-package com.codecool.Battleship;
+package com.codecool.Battleship.ship;
+
+import com.codecool.Battleship.board.Square;
+import com.codecool.Battleship.board.SquareStatus;
 
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 
 public class Ship {
 

@@ -1,4 +1,6 @@
-package com.codecool.Battleship;
+package com.codecool.Battleship.game;
+
+import com.codecool.Battleship.board.Square;
 
 import java.util.Scanner;
 
