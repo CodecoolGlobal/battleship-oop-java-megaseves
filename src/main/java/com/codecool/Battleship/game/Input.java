@@ -10,7 +10,6 @@ public class Input {
     private final Display display = new Display();
 
     private final int asciiCodeForA = 65;
-    private final int asciiCodeFor1 = 49;
 
 
     public void exitGame(String input){
